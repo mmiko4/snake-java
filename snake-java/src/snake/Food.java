@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Food {
 
-    
-
     int minX;
     int maxX;
     int rangeX;
@@ -14,7 +12,6 @@ public class Food {
     boolean eaten = true;
     Random random;
     int timesEaten = 0;
-
 
     public void init(char type){ // A -cała plansza ; L -lewa strona planszy ; R -prawa strona planszy
         random = new Random();
@@ -37,8 +34,6 @@ public class Food {
         }
     }
 
-
-
     public void create(Snake snake){ // tworzenie jedzenia dla konkretnego węża (głównie tryb PvP)
         boolean collision = true;
 
@@ -58,12 +53,9 @@ public class Food {
             for(int snake_pos : snake.snake_occupated_List){
                 if(pos == snake_pos){
                     collision = true;
-                    
                 }
             }
         }
-        
-
     }
 
     public void checkEaten(Snake snake){ // sprawdzanie, czy jedzenie jest zjedzone (pokrywa się z głową węża)
@@ -71,10 +63,6 @@ public class Food {
             timesEaten++;
             this.create(snake);
             snake.eat();
-
         }
-
-
     }
-
 }
