@@ -29,17 +29,13 @@ public class Records {
                 x -= 48;
                 if(x >= 0){
                     res *= 10;
-                    
-                    res+=x;
-                    
+                    res+=x; 
                 }
             }
             if(res != 0){
                 this.recordsList.add(res);
                 res = 0;
             }
-            
-            
         }
         fr.close();
 
@@ -52,7 +48,6 @@ public class Records {
         FileWriter fw = new FileWriter(file, true);
         int s = 0;
         
-        
         fw.write((s = rec/100)+48);
         rec -= s*100;
         fw.write((s = rec/10)+48);
@@ -61,5 +56,4 @@ public class Records {
 
         fw.close();
     }
-
 }
