@@ -1,12 +1,10 @@
 package snake;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.Random;
-
 
 public class GamePanel extends JPanel implements ActionListener{
     static final int FIELD_X = 16;
@@ -22,8 +20,6 @@ public class GamePanel extends JPanel implements ActionListener{
 
     Records records = new Records();
         
-    
-
     Snake snake1 = new Snake();
     Snake snake2 = new Snake();
     Food food1 = new Food();
@@ -37,6 +33,7 @@ public class GamePanel extends JPanel implements ActionListener{
     
     // 1    2    3    4    5    6    7    8    9    10   11   12
     // 13   14   15   16   17   18 ...
+	
     boolean running;
     boolean run_backup;
     Timer timer;
@@ -49,14 +46,12 @@ public class GamePanel extends JPanel implements ActionListener{
         this.addKeyListener(new MyKeyAdapter());
 
         //utworzenie przycisków startu gry:
-       
         soloButton = new JButton("Solo Mode");
         pvpButton = new JButton("PvP Mode");
 
         soloButton.addActionListener(this);
-		pvpButton.addActionListener(this); 
+	pvpButton.addActionListener(this); 
             
-
         this.add(soloButton);
         this.add(pvpButton);
         
@@ -86,8 +81,7 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         else{
             return y;
-        }
-            
+        }   
     }
   
     public void paintComponent (Graphics g) { // wyświetla na okno grę lub 'lobby'
@@ -108,7 +102,6 @@ public class GamePanel extends JPanel implements ActionListener{
             
     public void draw(Graphics g){ // elementy wyświetlane podczas gry
         if(running){
-
             g.setColor(Color.GRAY);
 
             for(int i = 0;i<FIELD_X;i++){
@@ -129,13 +122,12 @@ public class GamePanel extends JPanel implements ActionListener{
 
             g.fillRect(RECT_SIZE*(reconvert(food1.pos, true)-1), RECT_SIZE*(reconvert(food1.pos, false)-1), RECT_SIZE+1, RECT_SIZE+1);
 
-
             if(game_type == 'P'){
                 g.setColor(Color.GREEN);
                 for(int i : snake2.snake_occupated_List){
                     g.fillRect(RECT_SIZE*(reconvert(i, true)-1), RECT_SIZE*(reconvert(i, false)-1), RECT_SIZE+1, RECT_SIZE+1);
-
                 }
+		    
                 g.setColor(Color.PINK);
                 g.fillRect(RECT_SIZE*(reconvert(food2.pos, true)-1), RECT_SIZE*(reconvert(food2.pos, false)-1), RECT_SIZE+1, RECT_SIZE+1);
                 g.setColor(Color.GRAY);
@@ -145,12 +137,12 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     public void lobby(Graphics g){ // elementy wyświetlane w lobby
-
         g.setFont( new Font("Tahoma",Font.BOLD, 40));
         g.setColor(Color.WHITE);
         g.drawString("Last score: "+(snake1.lenght-1), 0, g.getFont().getSize());
         g.drawString("Top Scores:", 0, g.getFont().getSize()*3);
         int j = 0;
+	    
         try { // wyświetlanie topowych wyników (ranking)
             for(int i : records.getRecords()){
                 g.drawString("- "+i, 0, g.getFont().getSize()*(4+j));
@@ -178,17 +170,10 @@ public class GamePanel extends JPanel implements ActionListener{
                 g.drawString("DRAW", WINDOW_X/2, g.getFont().getSize()*3);
             }
         }
-
     }
 
-
-    
-    
-
-
-
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { // na każdym 'ticku' gry
 
         if(e.getSource() == soloButton){ // start trybu solo
             game_type = 'S';
@@ -196,8 +181,7 @@ public class GamePanel extends JPanel implements ActionListener{
             snake1.alive=true;
             snake1.init('A');
             food1.init('A');
-            food1.create(snake1);
-            
+            food1.create(snake1);  
         } 
 
         if(e.getSource() == pvpButton){ // start trybu PvP
@@ -212,9 +196,7 @@ public class GamePanel extends JPanel implements ActionListener{
             snake2.init('R');
             food2.init('R');
             food2.create(snake2);
-
         }
-
 
         if(running){
             if(bVisible){ // znikanie przycisków startu gry podczas gry
@@ -243,9 +225,7 @@ public class GamePanel extends JPanel implements ActionListener{
         }
 
         if(running == false){
-            
             if(bVisible == false){ // pojawianie się przycisków startu gry po jej zakończeniu
-                
                 soloButton.setVisible(true);
                 pvpButton.setVisible(true);
                 
@@ -341,7 +321,5 @@ public class GamePanel extends JPanel implements ActionListener{
             }
         }
     }
-
-    
 }
 
